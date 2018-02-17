@@ -28,6 +28,8 @@ public class Main {
             //TODO 비즈니스 로직
             testSave(em);
             queryLogicJoin(em);
+            updateRelation(em);
+            deleteRelation(em);
             tx.commit();//트랜잭션 커밋
 
         } catch (Exception e) {
@@ -64,5 +66,17 @@ public class Main {
         for (Member member : resultList) {
             System.out.println("[query] member.username= " + member.getUsername());
         }
+    }
+    private static void updateRelation(EntityManager em) {
+        Team team2 = new Team("team2", "팀2");
+        em.persist(team2);
+
+        Member member = em.find(Member.class, "member1");
+        member.setTeam(team2);
+    }
+
+    private static void deleteRelation(EntityManager em) {
+        Member member1 = em.find(Member.class, "member1");
+        member1.setTeam(null);
     }
 }
