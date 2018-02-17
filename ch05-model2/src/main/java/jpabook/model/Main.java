@@ -30,6 +30,7 @@ public class Main {
             queryLogicJoin(em);
             updateRelation(em);
             deleteRelation(em);
+            biDirection(em);
             tx.commit();//트랜잭션 커밋
 
         } catch (Exception e) {
@@ -78,5 +79,14 @@ public class Main {
     private static void deleteRelation(EntityManager em) {
         Member member1 = em.find(Member.class, "member1");
         member1.setTeam(null);
+    }
+
+    private static void biDirection(EntityManager em) {
+        Team team = em.find(Team.class, "team1");
+        List<Member> members = team.getMembers();
+
+        for(Member member: members) {
+            System.out.println("member.username = "+ member.getUsername());
+        }
     }
 }

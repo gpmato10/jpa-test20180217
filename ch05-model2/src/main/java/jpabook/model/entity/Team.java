@@ -20,7 +20,13 @@ public class Team {
 
     private String name;
 
+
+    //==추가==//
+    @OneToMany(mappedBy = "team")
+    private List<Member> members = new ArrayList<Member>();
+
     public Team() {
+
     }
 
     public Team(String id, String name) {
@@ -43,4 +49,12 @@ public class Team {
     public void setName(String name) {
         this.name = name;
     }
+    public List<Member> getMembers() {
+        return members;
+    }
+
+    public void setMembers(List<Member> members) {
+        this.members = members;
+    }
+
 }
